@@ -1,0 +1,50 @@
+{
+  "name": "@mambalabsdev/mcp-reddit-search-thread-scraper",
+  "version": "1.0.0",
+  "description": "MCP server for Reddit Search and Thread Scraper. Reddit posts and comments by keyword, subreddit, or thread URL, with exact term matching. No Reddit login or API key. Runs on Apify. Clay-ready output.",
+  "type": "module",
+  "bin": {
+    "mcp-reddit-search-thread-scraper": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "test": "npm run build && node --test test/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "reddit",
+    "reddit-scraper",
+    "social-listening",
+    "subreddit",
+    "lead-generation",
+    "apify",
+    "clay"
+  ],
+  "author": "Mamba Labs <labs@mambamindsetgrowth.com>",
+  "license": "MIT",
+  "homepage": "https://apify.com/mambalabs/reddit-search-thread-scraper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mambalabsdev/mcp-reddit-search-thread-scraper"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "5.9.3"
+  },
+  "mcpName": "com.mambabuilt/mcp-reddit-search-thread-scraper"
+}

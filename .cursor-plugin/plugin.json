@@ -1,0 +1,30 @@
+{
+  "name": "mcp-reddit-search-thread-scraper",
+  "displayName": "Reddit Search and Thread Scraper",
+  "version": "1.0.0",
+  "description": "MCP server for Reddit Search and Thread Scraper. Reddit posts and comments by keyword, subreddit, or thread URL, with exact term matching. No Reddit login or API key. Runs on Apify. Clay-ready output.",
+  "author": {
+    "name": "Mamba Labs",
+    "email": "labs@mambamindsetgrowth.com"
+  },
+  "homepage": "https://mambabuilt.com",
+  "repository": "https://github.com/mambalabsdev/mcp-reddit-search-thread-scraper",
+  "license": "MIT",
+  "category": "productivity",
+  "tags": [
+    "reddit",
+    "reddit-scraper",
+    "social-listening",
+    "subreddit",
+    "lead-generation"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "reddit",
+    "reddit-scraper",
+    "social-listening",
+    "subreddit"
+  ],
+  "mcpServers": ".mcp.json"
+}

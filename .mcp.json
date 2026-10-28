@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-reddit-search-thread-scraper": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-reddit-search-thread-scraper"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}
