@@ -106,7 +106,7 @@ Pay per event on Apify, billed to your Apify account. Prices in USD.
 |---|---|---|---|---|
 | `post-row`, per Reddit post | $0.0015 | $0.001425 | $0.00135 | $0.001275 |
 | `comment-row`, per Reddit comment | $0.0015 | $0.001425 | $0.00135 | $0.001275 |
-| `apify-actor-start`, per run start | $0.0005 | $0.0005 | $0.0005 | $0.0005 |
+| `apify-actor-start`, per run start | $0.003144 | $0.003144 | $0.003144 | $0.003144 |
 
 Summary rows, refused input, search results without the term, and already delivered rows are free. Mamba Labs pays the platform costs of the run, Apify proxy traffic included.
 
