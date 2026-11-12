@@ -212,7 +212,7 @@ server.registerTool(
   {
     title: "Search Reddit posts and comments",
     description:
-      "Search Reddit by keyword, across all of Reddit or inside chosen subreddits, read the newest posts of subreddits, or read thread URLs with their comments. Returns one flat row per post (title, text, author, subreddit, publish date, post link, outbound link, the search term it matched) and, when asked, one row per comment, plus one free summary row per query. By default a search result is kept only when the search term is in its title or text. Reads Reddit's public feeds; no Reddit login or API key. A run that does not succeed is returned as an error with its run ID. Read-only; requires an APIFY_TOKEN and is billed per post and comment row.",
+      "Search Reddit by keyword inside chosen subreddits, or across all of Reddit with the caller's own Serper or Brave search key; read the newest posts of subreddits; or read thread URLs with their comments. Returns one flat row per post (title, text, author, subreddit, publish date, score, comment count, post link, outbound link, the search term it matched, and data_route, the source of the row) and, when asked, one row per comment, plus one free summary row per query. Since 2026-11-12 Reddit is read through Arctic Shift, a free public archive of Reddit that needs a subreddit for searches, plus Reddit's public embed page for current score and comment count; Reddit ended RSS on 2026-11-13. reddit_route picks the main route (arctic_shift, search_key, or both) and the other route takes over when the main one fails. A search with no subreddit and no search key returns one free row that says what to add. No Reddit login. A run that does not succeed is returned as an error with its run ID. Read-only; requires an APIFY_TOKEN and is billed per post and comment row; a blocked run charges only the start fee.",
     annotations: {
       title: "Search Reddit posts and comments",
       readOnlyHint: true,
@@ -221,12 +221,16 @@ server.registerTool(
       openWorldHint: true,
     },
     inputSchema: {
-      search_terms: z.array(z.string()).optional().describe("Keywords to search Reddit for. With subreddits, each term runs inside each subreddit; without, across all of Reddit."),
+      search_terms: z.array(z.string()).optional().describe("Keywords to search Reddit for. With subreddits, each term runs inside each subreddit through Arctic Shift; without subreddits, across all of Reddit, which needs search_api_key."),
       subreddits: z.array(z.string()).optional().describe("Subreddit names (sales, r/sales, or a URL). With search terms, the search runs inside them; without, their newest posts are read."),
       thread_urls: z.array(z.string()).optional().describe("Reddit thread URLs to read with their comments, up to 200."),
-      sort: z.enum(["new", "relevance", "top", "comments", "hot"]).optional().describe("Search order. Default new."),
-      subreddit_sort: z.enum(["new", "hot", "top", "rising"]).optional().describe("Order for subreddit reads with no search term. Default new."),
-      time_window: z.enum(["hour", "day", "week", "month", "year", "all"]).optional().describe("Reddit's time filter for searches and the top sort. Default month."),
+      reddit_route: z.enum(["arctic_shift", "search_key", "both"]).optional().describe("Main route. arctic_shift (default): Arctic Shift archive, needs a subreddit for searches, the only source of comments. search_key: the caller's own Serper or Brave key, site:reddit.com across all of Reddit. both: both, deduped. The other route takes over when the main one fails or cannot run."),
+      search_provider: z.enum(["serper", "brave"]).optional().describe("Provider of search_api_key. Default serper."),
+      search_api_key: z.string().optional().describe("Optional. The caller's own Serper or Brave Search API key, for keyword search across all of Reddit. Sent only to that provider; never stored, logged, or written to a row."),
+      read_current_state: z.boolean().optional().describe("Read each post's current title, score, and comment count from Reddit's public embed page. Default true."),
+      sort: z.enum(["new", "relevance", "top", "comments", "hot"]).optional().describe("Search order. Arctic Shift returns newest first; top and comments re-order by stored score or comment count; relevance and hot read as new. Default new."),
+      subreddit_sort: z.enum(["new", "hot", "top", "rising"]).optional().describe("Order for subreddit reads with no search term: new, or top by stored score; hot and rising read as new. Default new."),
+      time_window: z.enum(["hour", "day", "week", "month", "year", "all"]).optional().describe("For searches, only posts from this window. Default month."),
       since_days: z.number().int().min(0).max(3650).optional().describe("Drop posts older than this many days."),
       max_posts_per_query: z.number().int().min(1).max(1000).optional().describe("Posts per search or subreddit. Default 50."),
       require_term_match: z.boolean().optional().describe("Keep a search result only when the term is in its title or text. Default true."),
@@ -236,7 +240,7 @@ server.registerTool(
       only_new: z.boolean().optional().describe("Skip posts and comments an earlier run returned for the same query (free). Default false."),
       state_key: z.string().optional().describe("Optional name for the only new results memory."),
       max_charge_usd: z.string().optional().describe("Optional. The run stops before a charge that would pass this amount."),
-      proxy_mode: z.enum(["auto", "residential"]).optional().describe("auto uses the Apify proxy pool with residential as the fallback; residential uses residential addresses for every request. Does not change the price. Default auto."),
+      proxy_mode: z.enum(["auto", "residential"]).optional().describe("Proxy for the embed page reads: auto (Apify proxy pool) or residential. A reliability setting only; it does not get around Reddit's block and does not change the price. Default auto."),
     },
   },
   async (args) => runActor("4Gsth5cP2Xt9V2xDN", "Reddit Search and Thread Scraper", asActorInput(args as Record<string, unknown>)),

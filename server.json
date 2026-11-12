@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.mambabuilt/mcp-reddit-search-thread-scraper",
-  "description": "Reddit posts and comments by keyword, subreddit, or thread URL, no Reddit login or API key",
-  "version": "1.0.0",
+  "description": "Reddit posts and comments by keyword, subreddit, or thread URL, via Arctic Shift or your search key",
+  "version": "1.1.0",
   "repository": {
     "url": "https://github.com/mambalabsdev/mcp-reddit-search-thread-scraper",
     "source": "github"
@@ -11,7 +11,7 @@
     {
       "registryType": "npm",
       "identifier": "@mambalabsdev/mcp-reddit-search-thread-scraper",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "transport": {
         "type": "stdio"
       },

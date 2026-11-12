@@ -1,7 +1,7 @@
 {
   "name": "@mambalabsdev/mcp-reddit-search-thread-scraper",
-  "version": "1.0.0",
-  "description": "MCP server for Reddit Search and Thread Scraper. Reddit posts and comments by keyword, subreddit, or thread URL, with exact term matching. No Reddit login or API key. Runs on Apify. Clay-ready output.",
+  "version": "1.1.0",
+  "description": "MCP server for Reddit Search and Thread Scraper. Reddit posts and comments by keyword, subreddit, or thread URL. Arctic Shift archive plus your own Serper or Brave key for search across all of Reddit. No Reddit login. Runs on Apify. Clay-ready output.",
   "type": "module",
   "bin": {
     "mcp-reddit-search-thread-scraper": "./build/index.js"

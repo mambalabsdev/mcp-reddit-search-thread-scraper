@@ -16,8 +16,8 @@ const ACTOR_REQUIRED = [];
 // Every input the live actor exposes to a buyer must be exposed by the tool.
 // Hidden schema fields are excluded by rule: source_tag is the landing page
 // attribution tag the actor sets for itself, not something a caller supplies.
-const ACTOR_INPUTS = ["comment_depth", "include_comments", "max_charge_usd", "max_comments_per_thread", "max_posts_per_query", "only_new", "proxy_mode", "require_term_match", "search_terms", "since_days", "sort", "state_key", "subreddit_sort", "subreddits", "thread_urls", "time_window"];
-// The actor takes no key of any kind.
+const ACTOR_INPUTS = ["comment_depth", "include_comments", "max_charge_usd", "max_comments_per_thread", "max_posts_per_query", "only_new", "proxy_mode", "read_current_state", "reddit_route", "require_term_match", "search_api_key", "search_provider", "search_terms", "since_days", "sort", "state_key", "subreddit_sort", "subreddits", "thread_urls", "time_window"];
+// The only key input is the caller's own optional search key (actor 0.2, 2026-11-12); source_tag is internal and not exposed.
 
 // Speak MCP over stdio to the built server and return the tools/list result.
 // No APIFY_TOKEN is set, on purpose: a client must see capabilities before it
